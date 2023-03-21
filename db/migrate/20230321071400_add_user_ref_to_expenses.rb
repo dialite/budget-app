@@ -1,5 +1,7 @@
 class AddUserRefToExpenses < ActiveRecord::Migration[7.0]
   def change
-    add_reference :expenses, :user, null: false, foreign_key: { to_table: 'users' }
+    add_column :expenses, :author_id, :integer
+    add_index :expenses, :author_id
+    add_foreign_key :expenses, :users, column: :author_id
   end
 end
