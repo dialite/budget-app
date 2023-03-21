@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @group_expense %>
+
+<div>
+  <%= link_to "Edit this group expense", edit_group_expense_path(@group_expense) %> |
+  <%= link_to "Back to group expenses", group_expenses_path %>
+
+  <%= button_to "Destroy this group expense", @group_expense, method: :delete %>
+</div>
