@@ -1,0 +1,2 @@
+class GroupExpense < ApplicationRecord
+end
