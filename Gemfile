@@ -5,6 +5,9 @@ ruby '3.2.0'
 
 gem 'dotenv-rails'
 
+# gen cancancan for authorization
+gem 'cancancan'
+
 # devise gem for authentication
 gem 'devise'
 
