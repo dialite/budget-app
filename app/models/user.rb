@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_many :expenses, class_name: 'Expense', foreign_key: 'author_id', dependent: :destroy
 
   validates :name, presence: true
+
+  def admin?
+    role.present? && role == 'admin'
+  end
 end
