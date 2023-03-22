@@ -2,7 +2,7 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="menu">
-    <% render partial: 'devise/shared/home', locals: {title: 'LOGIN PAGE', back_path: root_path } %>
+    <% render partial: 'partials/home', locals: {title: 'LOGIN PAGE', back_path: root_path } %>
     <%= f.submit "Log in", { class: "resend-action" } %>
   </div>
   
