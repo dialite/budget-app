@@ -10,8 +10,9 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container">
+      <%= render partial: "devise/shared/prompt" %>
+      <%= yield %>
+    </div>
   </body>
 </html>
