@@ -1,9 +1,13 @@
-Rails.application.routes.draw do  devise_for :users
+Rails.application.routes.draw do 
+  devise_for :users
 
-  resources :home, only: [:index]
+  resources :home
   resources :group_expenses
-  resources :expenses
-  resources :groups
+  
+  resources :groups do
+    resources :expenses
+  end
+
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
