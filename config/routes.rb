@@ -1,6 +1,6 @@
 Rails.application.routes.draw do  devise_for :users
 
-  resources :home, :only [:index]
+  resources :home, only: [:index]
   resources :group_expenses
   resources :expenses
   resources :groups
