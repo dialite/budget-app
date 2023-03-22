@@ -13,3 +13,66 @@
  *= require_tree .
  *= require_self
  */
+
+@import url("https://fonts.cdnfonts.com/css/proxima-nova-2");
+
+:root {
+  --orange: #e68d45;
+  --brown: #aa3e42;
+  --green: #5baf78;
+  --blue: #3470b4;
+  --black: #262729;
+  --dark: #434b54;
+  --greya: #f1f3f2;
+  --greyb: #e8eae9;
+  --greyc: #c7ccca;
+  --white: #fff;
+  --mainFont: "Montserrat", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+textarea {
+  font-family: var(--mainFont);
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--mainFont);
+  color: var(--black);
+  overflow-x: hidden;
+  background-color: var(--greya);
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .column {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
