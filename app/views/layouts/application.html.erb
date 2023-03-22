@@ -10,6 +10,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= render partial: "devise/shared/prompt" %>
+      <%= yield %>
+    </div>
   </body>
 </html>
