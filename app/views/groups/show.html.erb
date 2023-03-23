@@ -1,10 +1,22 @@
-<% if @group.icon.attached?%>
-    <%= image_tag(@group.icon) %>
-  <%else%>
-    <%= image_tag('group-money.svg') %>
-  <%end%>
-<h1><%= @group.name %></h1>
+<div class="menu">
+  <%= render partial: 'partials/menu', locals: { title: 'GROUP DETAILS', menu_path: root_path } %>
+</div>
 
-<%= link_to "Edit this group", edit_group_path(@group) %>
-<%= link_to "Back to groups", group_path %>
-<%= button_to "Destroy this group", @group, method: :delete %>
+<section class="group_detail_page">
+  <div class="group">
+    <div>
+      <% if @group.icon.attached?%>
+          <%= image_tag(@group.icon) %>
+        <%else%>
+          <%= image_tag('group-money.svg') %>
+        <%end%>
+      <h1><%= @group.name %></h1>
+    </div>
+
+    <div class="list_btn_gen">
+      <%= link_to "Edit this group", edit_group_path(@group) %>
+      <%= link_to "Back to groups", group_path %>
+      <%= button_to "Destroy this group", @group, method: :delete %>
+    </div>
+  </div>
+<section>

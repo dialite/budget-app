@@ -1,5 +1,14 @@
-<%= form_with model: @group, url: groups_path, local: true do |f| %>
-  <%= f.text_field :name, autofocus: true %>
-  <%= f.file_field :icon %>
-  <%= f.submit "Create Group" %>
-<% end %>
+<div class="menu">
+  <%= render partial: 'partials/menu', locals: { title: 'ADD GROUP', menu_path: root_path } %>
+</div>
+
+<section class="edit_add_page group">
+  <%= form_with model: @group, url: groups_path, local: true do |f| %>
+    <%= f.text_field :name, autofocus: true %>
+    <%= f.file_field :icon %>
+    <div class="form_btn">
+      <%= f.submit "Create Group", class: 'list_btn' %>
+      <button class="list_btn"><%= link_to "Back", groups_path %></button>
+    </div>
+  <% end %>
+</section>

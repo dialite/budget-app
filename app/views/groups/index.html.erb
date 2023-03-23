@@ -7,11 +7,11 @@
 <section class="groups">
   <div>
     <% @groups.each do |group| %>
-    <div class="category">
+    <div class="group">
      <div>
-      <a href=<%= category_expenses_path(group_id: group.id) %>>
+      <a href=<%= group_expenses_path(group_id: group.id) %>>
         <% if group.icon.attached?%>
-          <%= image_tag(category.icon) %>
+          <%= image_tag(group.icon) %>
         <%else%>
           <%= image_tag('money-chat-group.png') %>
         <%end%>
@@ -31,7 +31,7 @@
       <div class="list_gen">
         <h3>$ <%= group.expenses.sum(:amount) %></h3>
         <div class="btn_list">
-          <button class="list_btn"><%= link_to 'Detail', group_path(id: category.id) %> </button>
+          <button class="list_btn"><%= link_to 'Detail', group_path(id: group.id) %> </button>
           <button class="list_btn"><%= link_to 'Expense', group_expenses_path(group_id: group.id) %> </button>
         </div>
       </div>
