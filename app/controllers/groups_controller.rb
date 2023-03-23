@@ -29,15 +29,15 @@ class GroupsController < ApplicationController
       render :new, status: 400
     end
   end
+  
 
   # PATCH/PUT /groups/1 or /groups/1.json
   def update
-      if @group.update(group_params)
-        redirect_to group_path(id: @group.id), notice: 'Group was successfully updated.'
-      else
-        flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
-        render :edit, status: 400
-      end
+    if @group.update(group_params)
+      redirect_to group_path(id: @group.id), notice: 'Group was successfully updated.'
+    else
+      flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
+      render :edit, status: 400
     end
   end
 
