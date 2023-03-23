@@ -1,13 +1,18 @@
 class ExpensesController < ApplicationController
-  before_action :set_expense, only: %i[show edit update destroy]
+  load_and_authorize_resource except: %i[show]
+  before_action :find_user
+  before_action :find_group
+  before_action :find_group_expenses
 
   # GET /expenses or /expenses.json
   def index
-    @expenses = Expense.all
+    @expenses = Expense.find(params[:id])
   end
 
   # GET /expenses/1 or /expenses/1.json
-  def show; end
+  def show
+    @expense = Expense.find(params[:id])
+  end
 
   # GET /expenses/new
   def new
@@ -15,55 +20,72 @@ class ExpensesController < ApplicationController
   end
 
   # GET /expenses/1/edit
-  def edit; end
+  def edit
+    @expense = Expense.find(params[:id])
+  end
 
   # POST /expenses or /expenses.json
   def create
     @expense = Expense.new(expense_params)
-
-    respond_to do |format|
+    @expense.user = @user
       if @expense.save
-        format.html { redirect_to expense_url(@expense), notice: 'Expense was successfully created.' }
-        format.json { render :show, status: :created, location: @expense }
+        GroupExpense.create(group_id: @group.id, expense_id: @expense.id)
+        redirect_to group_expenses_path(group_id: @group.id), notice: 'Expense was successfully created.'
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
+        flash.now[:alert] = @expense.errors.full_messgaes.first if @expense.errors.any?
+        render :new, status: 400
       end
     end
   end
 
   # PATCH/PUT /expenses/1 or /expenses/1.json
   def update
-    respond_to do |format|
-      if @expense.update(expense_params)
-        format.html { redirect_to expense_url(@expense), notice: 'Expense was successfully updated.' }
-        format.json { render :show, status: :ok, location: @expense }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
-      end
+    @expense = Expense.find(params[:id])
+    if @expense.update(expense_params)
+      redirect_to group_expense_path(group_id: @group.id, id: @expense.id), notice: 'Expense was successfully updated.' }
+    else
+      flash.now[:alert] = @expense.errors.full_messgaes.first if @expense.errors.any?
+      render :edit, status: 400
     end
   end
 
   # DELETE /expenses/1 or /expenses/1.json
   def destroy
-    @expense.destroy
-
-    respond_to do |format|
-      format.html { redirect_to expenses_url, notice: 'Expense was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    if can? ;edit, @expense
+      @expense = Expense.find(params[:id])
+      @group_expenses = GroupExpense.where(expense_id: @expense.id)
+      @group_expenses.each do |group_expense|
+        expense_id = group_expense.expense_id
+        group_expense.destroy
+      end
+      if @expense.destroy
+        redirect_to group_expenses_path(group_id: @group.id, id: @expense.id), notice: 'Expense was successfully destroyed.'
+      else
+        flash.now[:alert] = @expense.error.full_messages.first if @expenses.errors.any?
+        render :index, status: 400
+      end
+    else
+      flash[;alert] = 'You are not Authorized'
+      redirect_to groups_path
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_expense
-    @expense = Expense.find(params[:id])
+  def find_user
+    @user = current_user
+  end
+
+  def find_group
+    @group = Group.find_by_id(params[:group_id])
+  end
+
+  def find_group_expenses
+    @group_expenses = GroupExpenses.where({ group_id: params[:group_id] }).order(created_at: :desc)
   end
 
   # Only allow a list of trusted parameters through.
   def expense_params
-    params.fetch(:expense, {})
+    params.require(:expense).permit(:name, :amount, :icon)
   end
 end
