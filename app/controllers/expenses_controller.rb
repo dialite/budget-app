@@ -6,7 +6,7 @@ class ExpensesController < ApplicationController
 
   # GET /expenses or /expenses.json
   def index
-    @expenses = Expense.find(params[:id])
+    authorize! :manage, @group
   end
 
   # GET /expenses/1 or /expenses/1.json
@@ -67,6 +67,7 @@ class ExpensesController < ApplicationController
     else
       flash[;alert] = 'You are not Authorized'
       redirect_to groups_path
+    end
   end
 
   private
