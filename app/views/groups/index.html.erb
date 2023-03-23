@@ -1,14 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<%= link_to "New group", new_group_path %>
 
-<h1>Groups</h1>
-
-<div id="groups">
-  <% @groups.each do |group| %>
-    <%= render group %>
-    <p>
-      <%= link_to "Show this group", group %>
-    </p>
-  <% end %>
+<div class="menu">
+  <%= render partial: 'partials/menu', locals: { title: 'GROUPS', menu_path: root_path } %>
 </div>
 
+<section class="groups">
+  <% @groups.each do |group| %>
+    <%= if group.icon.attached? %>
+      <%= image_tag(group.icon) %>
+    <% else %>
+      <%i= mage_tag('money-chat-group.png')%>
+    <%end%>
+      <%= group.name %>
+  <% end %>
+</section>
+
 <%= link_to "New group", new_group_path %>
+
+
