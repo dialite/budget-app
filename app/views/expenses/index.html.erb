@@ -14,7 +14,7 @@
           <%end%>
           <h2><%= @group.name %></h2>
         </div>
-        <h3>$ <%= @group.expenses.sum(:amount) %></h3>
+        <%# <h3>$ <%= @group.expenses.sum(:amount) %></h3> %>
       </div>
       <p>Currently, the <%= @group.name %> group has following <%= @group_expenses.count %> expenses </p>
       <button class="list_btn"><%= link_to 'Back', groups_path %></button>

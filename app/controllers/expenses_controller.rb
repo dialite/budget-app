@@ -35,14 +35,13 @@ class ExpensesController < ApplicationController
         flash.now[:alert] = @expense.errors.full_messgaes.first if @expense.errors.any?
         render :new, status: 400
       end
-    end
   end
 
   # PATCH/PUT /expenses/1 or /expenses/1.json
   def update
     @expense = Expense.find(params[:id])
     if @expense.update(expense_params)
-      redirect_to group_expense_path(group_id: @group.id, id: @expense.id), notice: 'Expense was successfully updated.' }
+      redirect_to group_expense_path(group_id: @group.id, id: @expense.id), notice: 'Expense was successfully updated.'
     else
       flash.now[:alert] = @expense.errors.full_messgaes.first if @expense.errors.any?
       render :edit, status: 400
@@ -51,7 +50,7 @@ class ExpensesController < ApplicationController
 
   # DELETE /expenses/1 or /expenses/1.json
   def destroy
-    if can? ;edit, @expense
+    if can? :edit, @expense
       @expense = Expense.find(params[:id])
       @group_expenses = GroupExpense.where(expense_id: @expense.id)
       @group_expenses.each do |group_expense|
@@ -65,7 +64,7 @@ class ExpensesController < ApplicationController
         render :index, status: 400
       end
     else
-      flash[;alert] = 'You are not Authorized'
+      flash[:alert] = 'You are not Authorized'
       redirect_to groups_path
     end
   end
@@ -82,7 +81,7 @@ class ExpensesController < ApplicationController
   end
 
   def find_group_expenses
-    @group_expenses = GroupExpenses.where({ group_id: params[:group_id] }).order(created_at: :desc)
+    @group_expenses = GroupExpense.where({ group_id: params[:group_id] }).order(created_at: :desc)
   end
 
   # Only allow a list of trusted parameters through.
