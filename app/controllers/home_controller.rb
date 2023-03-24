@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
-  before_action :set_group_expense, only: %i[show edit update destroy]
+  skip_before_action :authenticate_user!
 
   # GET /group_expenses or /group_expenses.json
-  def index; end
+  def index
+    redirect_to groups_path if user_signed_in?
+  end
 end

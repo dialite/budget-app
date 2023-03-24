@@ -1,10 +1,24 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @expense %>
-
-<div>
-  <%= link_to "Edit this expense", edit_expense_path(@expense) %> |
-  <%= link_to "Back to expenses", expenses_path %>
-
-  <%= button_to "Destroy this expense", @expense, method: :delete %>
+<div class="menu_bar">
+  <%= render partial: 'partials/menu', locals: { title: 'EXPENSE DETAIL', menu_path: root_path } %>
 </div>
+
+<section class="group_detail_page">
+  <div class="group">
+    <div>
+      <% if @expense.icon.attached?%>
+        <%= image_tag(@expense.icon) %>
+      <%else%>
+        <%= image_tag('expenses.png') %>
+      <%end%>
+      <h2><%= @expense.name %></h2>
+    </div>
+    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque iste quidem repudiandae. Dolor debitis quas impedit sit officiis dolorum beatae quaerat nesciunt doloribus expedita in distinctio laborum facilis ex sunt ipsum numquam, amet et odio iusto ab est. Vero, nemo.</p>
+    <h3 class="expense desc"><span>TOTAL EXPENSE: </span><span>$<%= @expense.amount %></span></h3>
+
+    <div class="list_btn_gen">
+      <button class="edit_btn list_btn"><%= link_to "Edit", edit_group_expense_path(group_id: @group.id, id: @expense.id) %></button>
+      <button class="back_btn list_btn"><%= link_to "Back", group_expenses_path(group_id: @group.id) %></button>
+      <%= button_to "Delete", @group_expense, method: :delete, class: 'del_btn list_btn' %>
+    </div>
+  </div>
+</section>

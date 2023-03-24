@@ -1,14 +1,57 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Expenses</h1>
-
-<div id="expenses">
-  <% @expenses.each do |expense| %>
-    <%= render expense %>
-    <p>
-      <%= link_to "Show this expense", expense %>
-    </p>
-  <% end %>
+<div class="menu">
+  <%= render partial: 'partials/menu', locals: { title: 'Expenses', menu_path: root_path } %>
 </div>
 
-<%= link_to "New expense", new_expense_path %>
+<section class="expenses_page groups_page">
+  <div class="scroll">
+    <div class="group group_header">
+      <div>
+        <div class="header_name">
+          <% if @group.icon.attached?%>
+            <%= image_tag(@group.icon) %>
+          <%else%>
+            <%= image_tag('money-chat-group.png') %>
+          <%end%>
+          <h2><%= @group.name %></h2>
+        </div>
+        <h3>$ <%= @group.expenses.sum(:amount) %></h3>
+      </div>
+      <p>Currently, the <%= @group.name %> group has following <%= @group_expenses.count %> expenses </p>
+      <button class="list_btn"><%= link_to 'Back', groups_path %></button>
+    </div>
+    
+    <div class="expeneses">
+      <% @group_expenses.each_with_index do |group_expense, index| %>
+        <div class="group">
+          <div>
+            <p><%= "#{index + 1})" %></p>
+            <% if group_expense.expense.icon.attached?%>
+              <%= image_tag(group_expense.expense.icon) %>
+            <%else%>
+              <%= image_tag('expenses.png') %>
+            <%end%>
+            <div>
+              <h2><%= group_expense.expense.name %></h2>
+              <% if Time.now - group_expense.created_at <= 1.minute %>
+                <p><%= time_ago_in_words(group_expense.created_at, include_seconds: true) %> ago</p>
+              <% elsif Time.now - group_expense.created_at <= 24.hours %>
+                <p><%= time_ago_in_words(group_expense.created_at) %> ago</p>
+              <% else %>
+                <p><%= group_expense.created_at.strftime('%b %d, %Y') %></p>
+              <% end %>
+            </div>
+          </div>
+          <div class="list_gen">
+            <h3>$ <%= group_expense.expense.amount %></h3>
+            <div>
+              <button class="list_btn"><%= link_to 'Detail', group_expense_path(group_id: @group.id, id: group_expense.id) %> </button>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <button class="add_btn">
+    <%= link_to 'Add new expense', new_group_expense_path(group_id: @group.id) %>
+  </button>
+</section>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :home
-  resources :group_expenses
+  # resources :group_expenses
   
   resources :groups do
     resources :expenses
@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   root "home#index"
+  get '/unauthorized', to: 'unauthorized#index'
 end

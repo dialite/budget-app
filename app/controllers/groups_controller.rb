@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  load_and_authorize_resource
   before_action :find_user
   before_action :set_group, only: %i[show edit update destroy]
 
@@ -23,7 +24,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.user = @user
     if @group.save
-      redirect_to group_path(id: @group.id), notice: 'Group was successfully created.'
+      redirect_to groups_path, notice: 'Group was successfully created.'
     else
       flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
       render :new, status: 400
@@ -41,14 +42,27 @@ class GroupsController < ApplicationController
   end
 
   # DELETE /groups/1 or /groups/1.json
+  # rubocop:disable Lint/UselessAssignment
   def destroy
-    if @group.destroy
-      redirect_to group_path, notice: 'Group was successfully deleted.'
+    if can? :edit, @group
+      @group_expenses = GroupExpense.where(group_id: @group.id)
+      @group_expenses.each do |group_expense|
+        expense_id = group_expense.expense_id
+        group_expense.destroy
+        expense = Expense.delete(expense_id)
+      end
+      if @group.destroy
+        redirect_to groups_path, notice: 'Group was successfully deleted'
+      else
+        flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
+        render :index, status: 400
+      end
     else
-      flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
-      render :index, status: 400
+      flash[:alert] = 'Un Authorized'
+      redirect_to groups_path
     end
   end
+  # rubocop:enable Lint/UselessAssignment
 
   private
 

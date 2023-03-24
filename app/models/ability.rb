@@ -13,7 +13,7 @@ class Ability
       can :manage, :all
     else
       can :manage, Group, user_id: user.id
-      can :manage, Expense, author_id: user.id
+      can :manage, Expense, user_id: user.id
     end
     #
     # The first argument to `can` is the action you are giving the user
