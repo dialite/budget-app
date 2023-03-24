@@ -4,7 +4,7 @@ class Expense < ApplicationRecord
   has_many :groups, through: :group_expenses
 
   has_one_attached :icon
-  
+
   validates :name, :amount, presence: true
   validates :amount, presence: true, numericality: { only_float: true, greater_than_or_equal_to: 0 }
 end

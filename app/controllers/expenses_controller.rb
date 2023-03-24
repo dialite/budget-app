@@ -28,13 +28,13 @@ class ExpensesController < ApplicationController
   def create
     @expense = Expense.new(expense_params)
     @expense.user = @user
-      if @expense.save
-        GroupExpense.create(group_id: @group.id, expense_id: @expense.id)
-        redirect_to group_expenses_path(group_id: @group.id), notice: 'Expense was successfully created.'
-      else
-        flash.now[:alert] = @expense.errors.full_messgaes.first if @expense.errors.any?
-        render :new, status: 400
-      end
+    if @expense.save
+      GroupExpense.create(group_id: @group.id, expense_id: @expense.id)
+      redirect_to group_expenses_path(group_id: @group.id), notice: 'Expense was successfully created.'
+    else
+      flash.now[:alert] = @expense.errors.full_messgaes.first if @expense.errors.any?
+      render :new, status: 400
+    end
   end
 
   # PATCH/PUT /expenses/1 or /expenses/1.json
@@ -53,12 +53,10 @@ class ExpensesController < ApplicationController
     if can? :edit, @expense
       @expense = Expense.find(params[:id])
       @group_expenses = GroupExpense.where(expense_id: @expense.id)
-      @group_expenses.each do |group_expense|
-        expense_id = group_expense.expense_id
-        group_expense.destroy
-      end
+      @group_expenses.each(&:destroy)
       if @expense.destroy
-        redirect_to group_expenses_path(group_id: @group.id, id: @expense.id), notice: 'Expense was successfully destroyed.'
+        redirect_to group_expenses_path(group_id: @group.id, id: @expense.id),
+                    notice: 'Expense was successfully destroyed.'
       else
         flash.now[:alert] = @expense.error.full_messages.first if @expenses.errors.any?
         render :index, status: 400
