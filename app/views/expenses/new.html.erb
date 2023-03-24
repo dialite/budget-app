@@ -1,9 +1,15 @@
-<h1>New expense</h1>
-
-<%= render "form", expense: @expense %>
-
-<br>
-
-<div>
-  <%= link_to "Back to expenses", expenses_path %>
+<div class="menu_bar">
+  <%= render partial: 'partials/menu', locals: { title: 'ADD EXPENSE', menu_path: root_path } %>
 </div>
+
+<section class="edit_add_page group">
+  <%= form_with model: @expense, url: group_expenses_path(group_id: @group.id), local: true do |f| %>
+    <%= f.text_field :name, autofocus: true, placeholder: "Expense name"  %>
+    <%= f.number_field :amount, placeholder: "Expense amount"  %>
+    <%= f.file_field :icon %>
+    <div class="form_btn">
+      <%= f.submit "Create Expense", class: 'list_btn' %>
+      <button class="list_btn"><%= link_to "Back", group_expenses_path(group_id: @group.id) %></button>
+    </div>
+  <% end %>
+</section>
