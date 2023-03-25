@@ -3,7 +3,7 @@
 <div class = "resend-msg">
   <%= form_for(resource, as: resource_name, data: {turbo: false}, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
     <div class="menu">
-      <% render partial: 'shared/home', locals: {title: 'RESEND CONFIRMATION MESSAGE', back_path: root_path } %>
+      <% render partial: 'partials/home', locals: {title: 'RESEND CONFIRMATION MESSAGE', back_path: root_path } %>
       <% f.submit "Resend confirmation", { class: "resend-actions" }%>
     </div>
 
