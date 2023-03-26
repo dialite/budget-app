@@ -1,37 +1,20 @@
-<h2>Sign up</h2>
+<%= form_for(resource, as: resource_name, data: {turbo: false}, url: registration_path(resource_name)) do |f| %>
+  <div class="menu">
+    <%= render partial: 'partials/home', locals: { title: 'SIGN UP', back_path: root_path } %>
+    <%= f.submit "Sign up" %>
+  </div>
+  
+  <div class="sign_form">
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "Enter Your Name" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter Email" %>
+    <% if @minimum_password_length %>
+    <% @minimum_password_length %>
+    <% end %>
 
-<div class="signup">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <div class="menu">
-      <% render partial: 'partials/home', locals: {title: 'SIGN UP PAGE', back_path: root_path } %>
-      <%= f.submit "Sign up", { class: "resend-action" } %>
-    </div>
-
-    <div class="field">
-      <%= f.label :name %><br />
-      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: 'Enter name' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm password" %>
-    </div>
-
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Enter Password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm password" %>
     <%= render "devise/shared/error_messages", resource: resource %>
-  <% end %>
+  </div>
+<% end %>
 
-  <%= render "devise/shared/links" %>
-</div>
+<%= render "devise/shared/links" %>

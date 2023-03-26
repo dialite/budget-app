@@ -21,48 +21,46 @@ class GroupsController < ApplicationController
 
   # POST /groups or /groups.json
   def create
-    @group = Group.new(group_params)
-    @group.user = @user
+    @group = @user.groups.build(group_params)
+
     if @group.save
       redirect_to groups_path, notice: 'Group was successfully created.'
     else
       flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
-      render :new, status: 400
+      render :new, status: :bad_request
     end
   end
 
   # PATCH/PUT /groups/1 or /groups/1.json
   def update
     if @group.update(group_params)
-      redirect_to group_path(id: @group.id), notice: 'Group was successfully updated.'
+      redirect_to @group, notice: 'Group was successfully updated.'
     else
       flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
-      render :edit, status: 400
+      render :edit, status: :bad_request
     end
   end
 
   # DELETE /groups/1 or /groups/1.json
-  # rubocop:disable Lint/UselessAssignment
   def destroy
     if can? :edit, @group
-      @group_expenses = GroupExpense.where(group_id: @group.id)
-      @group_expenses.each do |group_expense|
-        expense_id = group_expense.expense_id
+      GroupExpense.where(group_id: @group.id).each do |group_expense|
+        expense = group_expense.expense
         group_expense.destroy
-        expense = Expense.delete(expense_id)
+        expense.destroy
       end
+
       if @group.destroy
         redirect_to groups_path, notice: 'Group was successfully deleted'
       else
         flash.now[:alert] = @group.errors.full_messages.first if @group.errors.any?
-        render :index, status: 400
+        render :index, status: :bad_request
       end
     else
-      flash[:alert] = 'Un Authorized'
+      flash[:alert] = 'Unauthorized'
       redirect_to groups_path
     end
   end
-  # rubocop:enable Lint/UselessAssignment
 
   private
 

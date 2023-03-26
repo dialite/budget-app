@@ -1,17 +1,10 @@
-<h2>Forgot your password?</h2>
-
 <div class="resend-msg">
   <%= form_for(resource, as: resource_name, data: { turbo:false }, url: password_path(resource_name), html: { method: :post }) do |f| %>
     <div class="menu">
-      <% render partial: 'shared/home', locals: {title: 'RESET PASSWORD', back_path: root_path } %>
-      <% f.submit "Reset password", { class: "resend-actions" }%>
+      <%= render partial: 'partials/home', locals: {title: 'RESET PASSWORD', back_path: root_path } %>
+      <%= f.submit "Reset password", { class: "resend-actions" }%>
     </div>
-
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "resend-entry"  %>
-    </div>
-
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "resend-entry"  %>
     <%= render "devise/shared/error_messages", resource: resource %>
   <% end %>
 

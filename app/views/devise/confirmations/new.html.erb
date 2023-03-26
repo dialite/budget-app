@@ -1,14 +1,11 @@
-<h2>Resend confirmation instructions</h2>
-
 <div class = "resend-msg">
   <%= form_for(resource, as: resource_name, data: {turbo: false}, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
     <div class="menu">
-      <% render partial: 'partials/home', locals: {title: 'RESEND CONFIRMATION MESSAGE', back_path: root_path } %>
-      <% f.submit "Resend confirmation", { class: "resend-actions" }%>
+      <%= render partial: 'partials/home', locals: {title: 'RESEND CONFIRMATION MESSAGE', back_path: root_path } %>
+      <%= f.submit "Resend confirmation", { class: "resend-actions" }%>
     </div>
 
-    <div class="field">
-      <%= f.label :email %><br />
+    <div class="sign_form">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), placeholder: "Email", class: "resend-entry" %>
     </div>
 

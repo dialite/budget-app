@@ -39,30 +39,28 @@ class ExpensesController < ApplicationController
 
   # PATCH/PUT /expenses/1 or /expenses/1.json
   def update
-    @expense = Expense.find(params[:id])
     if @expense.update(expense_params)
       redirect_to group_expense_path(group_id: @group.id, id: @expense.id), notice: 'Expense was successfully updated.'
     else
-      flash.now[:alert] = @expense.errors.full_messgaes.first if @expense.errors.any?
-      render :edit, status: 400
+      flash.now[:alert] = @expense.errors.full_messages.first if @expense.errors.any?
+      render :edit, status: :bad_request
     end
   end
 
   # DELETE /expenses/1 or /expenses/1.json
   def destroy
     if can? :edit, @expense
-      @expense = Expense.find(params[:id])
-      @group_expenses = GroupExpense.where(expense_id: @expense.id)
-      @group_expenses.each(&:destroy)
+      @group_expenses = @expense.group_expenses
+      @group_expenses.destroy_all
       if @expense.destroy
         redirect_to group_expenses_path(group_id: @group.id, id: @expense.id),
                     notice: 'Expense was successfully destroyed.'
       else
-        flash.now[:alert] = @expense.error.full_messages.first if @expenses.errors.any?
-        render :index, status: 400
+        flash.now[:alert] = @expense.errors.full_messages.first if @expense.errors.any?
+        render :index, status: :bad_request
       end
     else
-      flash[:alert] = 'You are not Authorized'
+      flash[:alert] = 'You are not authorized'
       redirect_to groups_path
     end
   end
