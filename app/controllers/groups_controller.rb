@@ -22,7 +22,7 @@ class GroupsController < ApplicationController
   # POST /groups or /groups.json
   def create
     @group = @user.groups.build(group_params)
-  
+
     if @group.save
       redirect_to groups_path, notice: 'Group was successfully created.'
     else
@@ -42,7 +42,6 @@ class GroupsController < ApplicationController
   end
 
   # DELETE /groups/1 or /groups/1.json
-  # rubocop:disable Lint/UselessAssignment
   def destroy
     if can? :edit, @group
       GroupExpense.where(group_id: @group.id).each do |group_expense|
@@ -50,7 +49,7 @@ class GroupsController < ApplicationController
         group_expense.destroy
         expense.destroy
       end
-  
+
       if @group.destroy
         redirect_to groups_path, notice: 'Group was successfully deleted'
       else
@@ -62,8 +61,6 @@ class GroupsController < ApplicationController
       redirect_to groups_path
     end
   end
-  
-  # rubocop:enable Lint/UselessAssignment
 
   private
 

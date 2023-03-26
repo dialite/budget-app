@@ -53,7 +53,8 @@ class ExpensesController < ApplicationController
       @group_expenses = @expense.group_expenses
       @group_expenses.destroy_all
       if @expense.destroy
-        redirect_to group_expenses_path(group_id: @group.id, id: @expense.id), notice: 'Expense was successfully destroyed.'
+        redirect_to group_expenses_path(group_id: @group.id, id: @expense.id),
+                    notice: 'Expense was successfully destroyed.'
       else
         flash.now[:alert] = @expense.errors.full_messages.first if @expense.errors.any?
         render :index, status: :bad_request
