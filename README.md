@@ -128,7 +128,7 @@ gem install rails
 
 Clone this repository to your desired folder:
 
-git clone https://github.com/sonyco-4u/budget-app2.git
+git clone https://github.com/dialite/budget-app.git
 
 cd budget-app
 
@@ -173,7 +173,7 @@ rspec
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/sonyco-4u/budget-app2.git/issues).
+Feel free to check the [issues page](https://github.com/dialite/budget-app.git/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
