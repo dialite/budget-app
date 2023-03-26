@@ -105,7 +105,7 @@ After you're finished please remove all the comments and instructions!
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-> View Video Record [here](https://www.loom.com/share/bde44fe71ccc45b986fcdf264b71aebe)
+> View Video Record [here](https://www.loom.com/share/72b7b4bf762c4b9b823b048a9b158345)
 
 > View Live Demo [here](https://budget-app-s6rh.onrender.com)
 
