@@ -1,5 +1,4 @@
 class GroupsController < ApplicationController
-  load_and_authorize_resource
   before_action :find_user
   before_action :set_group, only: %i[show edit update destroy]
 
