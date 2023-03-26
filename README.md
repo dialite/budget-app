@@ -55,7 +55,7 @@ After you're finished please remove all the comments and instructions!
 
 # 📖 Budget App <a name="about-project"></a>
 
-**The Blog app** is a mobile web application where you can manage your budget: you have a list of transactions associated with a category, so that you can see how much money you spent and on what.
+**The Budget app** is a mobile web application that enable users as groups manage their budgets: where expense lists are created and managed as transactions associated with a group, to enable proper accountability of financial disposement and outflow.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -161,7 +161,8 @@ rspec
 
 ## 🔭 Future Features <a name="future-features"></a>
 
->
+- Geographical locations of transactions carried out
+- Heirarchy of expense preference
 
 - [ ] **Add API Endpoints**
 
