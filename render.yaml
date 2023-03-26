@@ -1,18 +1,18 @@
 databases:
-  - name: mysite
-    databaseName: mysite
-    user: mysite
+  - name: Budget-app
+    databaseName: microverse_cec9
+    user: microverse_cec9_user
 
 services:
   - type: web
-    name: mysite
+    name: Budget-app
     env: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite
+          name: microverse_cec9
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
