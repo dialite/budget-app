@@ -9,13 +9,8 @@ class Ability
     #   return unless user.admin?
     #   can :manage, :all
 
-    if user.admin?
-      can :manage, :all
-    else
-      can :manage, Group, user_id: user.id
-      can :manage, Expense, user_id: user.id
-    end
-    #
+    user.admin? ? can(:manage, :all) : can(:manage, [Group, Expense], user_id: user.id)
+
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions

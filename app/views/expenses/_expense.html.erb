@@ -1,2 +1,26 @@
-<div id="<%= dom_id expense %>">
+<div class="group">
+  <div>
+    <p><%= "#{index + 1})" %></p>
+    <% if group_expense.expense.icon.attached?%>
+      <%= image_tag(group_expense.expense.icon) %>
+    <%else%>
+      <%= image_tag('expenses.png') %>
+    <%end%>
+    <div>
+      <h2><%= group_expense.expense.name %></h2>
+      <% if Time.now - group_expense.created_at <= 1.minute %>
+        <p><%= time_ago_in_words(group_expense.created_at, include_seconds: true) %> ago</p>
+      <% elsif Time.now - group_expense.created_at <= 24.hours %>
+        <p><%= time_ago_in_words(group_expense.created_at) %> ago</p>
+      <% else %>
+        <p><%= group_expense.created_at.strftime('%b %d, %Y') %></p>
+      <% end %>
+    </div>
+  </div>
+  <div class="list_gen">
+    <h3>$ <%= group_expense.expense.amount %></h3>
+    <div>
+      <button class="list_btn"><%= link_to 'Detail', group_expense_path(group_id: @group.id, id: group_expense.id) %> </button>
+    </div>
+  </div>
 </div>
