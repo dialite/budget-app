@@ -88,15 +88,15 @@ After you're finished please remove all the comments and instructions!
 
 - **Spash Screen**
 - **Sign up and log in pages**
-- **Home page (catagories page)**
+- **Home page (Groups page)**
 - **Transactions page**
-- **"Add a new category" page**
+- **"Add a new group" page**
 - **"Add a new transaction" page**
 - **Unit & Integration Testing with RSpec & Capybara**
 - **Aunthentication with Devise**
 - **Database management with Postgres**
 - **ORM with ActiveRecord**
-- **Deployment with Heroku**
+- **Deployment with Render**
 - **Project Demo with Loom**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
