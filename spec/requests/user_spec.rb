@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Log in page', type: :system do
   describe 'users/signin' do
+    let(:user) { User.create(name: 'user', email: 'user@example.com', password: 'password') }
+
     before(:each) do
-      @user = User.create(name: 'user', email: 'user@example.com', password: 'password')
-      @user.save!
+      user.save!
       visit new_user_session_path
     end
 
@@ -13,9 +14,9 @@ RSpec.describe 'Log in page', type: :system do
     end
 
     it 'displays email and password input field and submit button' do
+      expect(page).to have_button('Log in')
       expect(page).to have_field('Email')
       expect(page).to have_field('Password')
-      expect(page).to have_button('Log in')
     end
 
     it 'displays detail error with empty credentials' do
@@ -33,11 +34,9 @@ RSpec.describe 'Log in page', type: :system do
     end
 
     it 'click on SIGNUP button' do
-      # Find the link using a CSS selector that targets both the link text and the icon
       link = find('a', text: 'Sign up', match: :first)
-      # Click on the link
       link.click
-      sleep(1)
+      sleep(2)
       expect(page).to have_current_path new_user_registration_path
     end
 

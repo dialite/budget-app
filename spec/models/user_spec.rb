@@ -1,32 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject do
-    described_class.new(name: 'Raymond', password: 'newlight', email: 'contentcreator@fun.com', id: 1)
-  end
+  let(:user) { User.new(name: 'Raymond', password: 'newlight', email: 'contentcreator@fun.com', id: 1) }
 
   describe 'Validations' do
     it 'is valid with valid attributes' do
-      expect(subject).to be_valid
+      expect(user).to be_valid
     end
 
     it 'is not valid without a password' do
-      subject.password = nil
-      expect(subject).to_not be_valid
+      user.password = nil
+      expect(user).to_not be_valid
     end
 
     it 'is not valid without an email' do
-      subject.email = nil
-      expect(subject).to_not be_valid
+      user.email = nil
+      expect(user).to_not be_valid
     end
 
-    it 'is not valid without an name' do
-      subject.name = nil
-      expect(subject).to_not be_valid
+    it 'is not valid without a name' do
+      user.name = nil
+      expect(user).to_not be_valid
     end
 
-    it 'name should have a correct value' do
-      expect(subject.name).to eql 'Raymond'
+    it 'has the correct name value' do
+      expect(user.name).to eq 'Raymond'
     end
   end
 end
+

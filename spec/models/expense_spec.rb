@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Expense, type: :model do
-  subject do
-    @user = User.create!(name: 'raymond', email: 'king@pride.com', password: '123456789', id: 1)
-    @expense = Expense.create(name: 'Trends', amount: 10.1, user: @user, user_id: 1, id: 1)
-  end
+  let(:user) { User.create(name: 'raymond', email: 'king@pride.com', password: '123456789') }
 
-  before { subject.save }
+  subject { described_class.create(name: 'Trends', amount: 10.1, user: user) }
+
+  it { is_expected.to be_valid }
 
   it 'is not valid without a name' do
     subject.name = nil
@@ -18,27 +17,8 @@ RSpec.describe Expense, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it 'is valid with valid attributes' do
-    expect(subject).to be_valid
-  end
-
-  it 'is not valid if any empty attribute' do
-    subject.name = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'name should be present' do
-    subject.name = nil
-    expect(subject).to_not be_valid
-  end
-
   it 'name should not be empty' do
     subject.name = ' '
-    expect(subject).to_not be_valid
-  end
-
-  it 'amount should be present' do
-    subject.amount = nil
     expect(subject).to_not be_valid
   end
 

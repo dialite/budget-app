@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Groups', type: :request do
   subject do
-    @user = User.create!(name: 'someone', email: 'user@user.com', password: 'password', id: 1)
-    @group = Group.create!(name: 'stationary', icon: @icon_file, user: @user)
+    @user = User.create!(name: 'leader', email: 'leader.group@team.com', password: '123456789', id: 2)
+    @group = Group.create!(name: 'The players', icon: @icon_file, user: @user)
   end
 
   before do
-    @icon_file = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'test.png'), 'image/png')
+    @icon_file = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'test.png'), 'photo.png')
     subject
   end
 
