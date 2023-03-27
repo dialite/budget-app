@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Expense, type: :model do
   let(:user) { User.create(name: 'raymond', email: 'king@pride.com', password: '123456789') }
 
-  subject { described_class.create(name: 'Trends', amount: 10.1, user: user) }
+  subject { described_class.create(name: 'Trends', amount: 10.1, user:) }
 
   it { is_expected.to be_valid }
 
