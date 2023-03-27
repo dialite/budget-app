@@ -25,7 +25,7 @@ After you're finished please remove all the comments and instructions!
 <div align="center">
   <br/>
 
-  <h3><b>budget-app2</b></h3>
+  <h3><b>Budget-App</b></h3>
 
 </div>
 
@@ -105,7 +105,7 @@ After you're finished please remove all the comments and instructions!
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-> View Video Record [here](https://www.loom.com/share/72b7b4bf762c4b9b823b048a9b158345)
+> View Video Record [here](https://www.loom.com/share/61869fc05a214954a763c78bb6f4838e)
 
 > View Live Demo [here](https://budget-app-s6rh.onrender.com)
 
