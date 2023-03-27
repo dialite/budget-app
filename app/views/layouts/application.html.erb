@@ -10,6 +10,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+      <%= render partial: "partials/prompt" %>
+    </div>
   </body>
 </html>

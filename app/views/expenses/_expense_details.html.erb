@@ -1,0 +1,18 @@
+<div class="group">
+  <div>
+    <% if @expense.icon.attached?%>
+      <%= image_tag(@expense.icon) %>
+    <%else%>
+      <%= image_tag('expenses.png') %>
+    <%end%>
+    <h2><%= @expense.name %></h2>
+  </div>
+  <p class="desc">This is a group expense app written with ruby on rails linked with postgresql</p>
+  <h3 class="expense desc"><span>TOTAL EXPENSE: </span><span>$<%= @expense.amount %></span></h3>
+
+  <div class="list_btn_gen">
+    <button class="edit_btn list_btn"><%= link_to "Edit", edit_group_expense_path(group_id: @group.id, id: @expense.id) %></button>
+    <button class="back_btn list_btn"><%= link_to "Back", group_expenses_path(group_id: @group.id) %></button>
+    <%= button_to "Delete", @group_expense, method: :delete, class: 'del_btn list_btn' %>
+  </div>
+</div>

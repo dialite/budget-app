@@ -1,0 +1,7 @@
+<div class="menu">
+  <%= render partial: 'partials/menu', locals: { title: 'EXPENSE DETAIL', menu_path: root_path } %>
+</div>
+
+<section class="group_detail_page">
+  <%= render partial: 'expense_details', locals: { expense: @expense, group: @group } %>
+</section>

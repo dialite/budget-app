@@ -1,0 +1,13 @@
+<div class="menu">
+  <%= render partial: 'partials/menu', locals: { title: 'GROUPS', menu_path: root_path } %>
+</div>
+
+<section class="groups_page">
+  <div>
+    <%= render partial: 'group', locals: { groups: @groups } %>
+  </div>
+  <button class="add_btn"><%= link_to 'Add new group', new_group_path %> </button>
+</section>
+
+
+

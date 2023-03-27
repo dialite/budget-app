@@ -1,0 +1,32 @@
+<div class="menu">
+  <%= render partial: 'partials/menu', locals: { title: 'Expenses', menu_path: root_path } %>
+</div>
+
+<section class="expenses_page groups_page">
+  <div class="scroll">
+    <div class="group group_header">
+      <div>
+        <div class="header_name">
+          <% if @group.icon.attached?%>
+            <%= image_tag(@group.icon) %>
+          <%else%>
+            <%= image_tag('money-chat-group.png') %>
+          <%end%>
+          <h2><%= @group.name %></h2>
+        </div>
+        <h3>$ <%= @group.expenses.sum(:amount) %></h3>
+      </div>
+      <p>Currently, the <%= @group.name %> group has following <%= @group_expenses.count %> expenses </p>
+      <button class="list_btn"><%= link_to 'Back', groups_path %></button>
+    </div>
+    
+    <div class="expeneses">
+      <% @group_expenses.each_with_index do |group_expense, index| %>
+        <%= render partial: 'expense', collection: @group_expenses, as: :group_expense, locals: { index: index } %>
+      <% end %>
+    </div>
+  </div>
+  <button class="add_btn">
+    <%= link_to 'Add new expense', new_group_expense_path(group_id: @group.id) %>
+  </button>
+</section>
