@@ -4,6 +4,7 @@
       <%= render partial: 'partials/home', locals: {title: 'RESET PASSWORD', back_path: root_path } %>
       <%= f.submit "Reset password", { class: "resend-actions" }%>
     </div>
+    <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "resend-entry"  %>
     <%= render "devise/shared/error_messages", resource: resource %>
   <% end %>

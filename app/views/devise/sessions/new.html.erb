@@ -5,7 +5,9 @@
   </div>
   
   <div class="log_form">
+    <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+    <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password" %>
     <%# <!-- <% if devise_mapping.rememberable? %>
       <div class="field">

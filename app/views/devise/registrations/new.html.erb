@@ -5,13 +5,17 @@
   </div>
   
   <div class="sign_form">
+    <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "Enter Your Name" %>
+    <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter Email" %>
     <% if @minimum_password_length %>
-    <% @minimum_password_length %>
+      <% @minimum_password_length %>
     <% end %>
-
+    
+    <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "new-password", placeholder: "Enter Password" %>
+    <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm password" %>
     <%= render "devise/shared/error_messages", resource: resource %>
   </div>

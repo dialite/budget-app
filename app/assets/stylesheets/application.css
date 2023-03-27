@@ -20,7 +20,9 @@
   --orange: #725034;
   --brown: #ee4a4f;
   --green: #9ac5a9;
+  --green2: #2bdf6a;
   --blue: #7899c0;
+  --blue2: #0a53ac;
   --black: #808388;
   --dark: #868e97;
   --greya: #f1f3f2;
@@ -39,6 +41,23 @@
   outline: none;
 }
 
+body {
+  background-size: cover;
+  background-position: center;
+  font-family: var(--mainFont);
+  color: var(--black);
+  overflow-x: hidden;
+  background-color: var(--greya);
+}
+
+.flash-notice,
+.flash-alert {
+  padding: 1rem;
+  text-align: center;
+  color: var(--brown);
+  font-size: 1rem;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -49,11 +68,7 @@ a {
   background-size: cover;
   background-position: center;
   filter: blur(5px);
-  -webkit-filter: blur(5px); /* for Safari and older versions of Chrome */
-}
-
-a:hover {
-  text-decoration: underline;
+  -webkit-filter: blur(5px);
 }
 
 img {
@@ -61,18 +76,13 @@ img {
   height: 70px;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 textarea {
   font-family: var(--mainFont);
   font-size: 16px;
-}
-
-body {
-  background-size: cover;
-  background-position: center;
-  font-family: var(--mainFont);
-  color: var(--black);
-  overflow-x: hidden;
-  background-color: var(--greya);
 }
 
 input {
@@ -90,14 +100,6 @@ input:focus {
 input::placeholder {
   color: var(--greyc);
   letter-spacing: 0.6px;
-}
-
-.flash-notice,
-.flash-alert {
-  padding: 1rem;
-  text-align: center;
-  color: var(--brown);
-  font-size: 1rem;
 }
 
 .menu h2 {
@@ -162,8 +164,6 @@ input::placeholder {
   letter-spacing: 1px;
 }
 
-/* The "home_container" class is using CSS Grid layout to create a two-row grid, with the first row taking up all available space (1fr)
-and the second row taking up no space (0fr). */
 .home_container {
   background-size: cover;
   background-position: center;
@@ -180,7 +180,7 @@ and the second row taking up no space (0fr). */
 }
 
 .home_container h1 span:first-child {
-  color: var(--blue);
+  color: var(--blue2);
 }
 
 .home_container h1 span:nth-child(2) {
@@ -206,7 +206,7 @@ and the second row taking up no space (0fr). */
 }
 
 .home-login {
-  background: var(--blue);
+  background: var(--blue2);
   color: var(--white);
 }
 
@@ -235,7 +235,7 @@ and the second row taking up no space (0fr). */
 
 .menu {
   width: 100%;
-  background: var(--blue);
+  background: var(--blue2);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -311,15 +311,13 @@ and the second row taking up no space (0fr). */
   color: var(--greyc);
 }
 
-/* The "add_btn" class is used to style a button with a green background color, no border,
-a height of 50 pixels, and a width of 94% of the viewport width. */
 .add_btn {
-  background: var(--green);
+  background: var(--green2);
   border: none;
+  border-radius: 3px;
   height: 50px;
   width: 94vw;
   margin: 0 auto 0.5rem auto;
-  border-radius: 3px;
   box-shadow: 2px 2px 3px var(--greyc), -1px 0 3px var(--greyc);
 }
 
@@ -394,7 +392,6 @@ a height of 50 pixels, and a width of 94% of the viewport width. */
   width: 100%;
 }
 
-/* This is a CSS selector targeting an input element of type "text" within a form element with a class of "edit_add_page. */
 .edit_add_page form input[type="text"] {
   width: 100%;
   border: none;
@@ -412,7 +409,7 @@ form input[type="file"] {
 }
 
 form input[type="file"]::-webkit-file-upload-button {
-  background: var(--blue);
+  background: var(--blue2);
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;

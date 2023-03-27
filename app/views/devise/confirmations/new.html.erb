@@ -6,6 +6,7 @@
     </div>
 
     <div class="sign_form">
+      <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), placeholder: "Email", class: "resend-entry" %>
     </div>
 
